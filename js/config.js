@@ -1,4 +1,10 @@
 const fonts = {
+	tengwar: {
+		// Tengwar script
+		glyphMSDFURL: "assets/tengwar.png",
+		glyphSequenceLength: 36,
+		glyphTextureGridSize: [6, 6],
+	},
 	coptic: {
 		// The script the Gnostic codices were written in
 		glyphMSDFURL: "assets/coptic_msdf.png",
@@ -58,6 +64,7 @@ const fonts = {
 };
 
 const textureURLs = {
+	broken: "assets/broken.png",
 	sand: "assets/sand.png",
 	pixels: "assets/pixel_grid.png",
 	mesh: "assets/mesh.png",
@@ -132,6 +139,28 @@ const defaults = {
 };
 
 const versions = {
+	custom: {
+		font: "tengwar",
+		numColumns: 80,
+		bloomStrength: 2,
+		cursorIntensity: 5,
+		animationSpeed: 0.5,
+		volumetric: true,
+		rippleTypeName: "circle",
+		isPolar: false, // Whether the glyphs arc across the screen or sit in a standard grid
+		hasThunder: false, // An effect that adds dramatic lightning flashes
+		baseTexture: "broken",
+		forwardSpeed: 0.2,
+		palette: [
+			{ color: hsl(0.6, 1.0, 0.05), at: 0.0 },
+			{ color: hsl(0.6, 0.8, 0.1), at: 0.1 },
+			{ color: hsl(0.88, 0.8, 0.5), at: 0.5 },
+			{ color: hsl(0.15, 1.0, 0.6), at: 0.8 },
+			{ color: hsl(0.1, 1.0, 0.9), at: 1.0 },
+			{ color: hsl(1, 0, 2), at: 2.0 },
+		],
+	
+	},	
 	classic: {},
 	megacity: {
 		font: "megacity",
