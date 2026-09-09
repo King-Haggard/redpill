@@ -9,7 +9,7 @@ My Goals:
 - Start a new vertical line of rain if a key on the keyboad is pressed.
 - Let the vertical line end at the horizontal line with the key that was pressed on the keybord.
 
-[![Matrix TEngwat screenshot](/tengwar_screenshot.png?raw=true "Tengwar font.")]
+[![Matrix Tengwar screenshot](/tengwar_screenshot.png?raw=true "Tengwar font.")]
 
 
 
