@@ -1,3 +1,21 @@
+# Taking the red pill
+
+Yes, the digital rain is cool. But can it teach me something about coding? Can I teach myself something about coding? Or at least tweking the code that's already there? Let's try.
+
+My Goals:
+
+- Add a different font. Done.
+- Make the rain stop and aggregate at a certain horizontal line.
+- Start a new vertical line of rain if a key on the keyboad is pressed.
+- Let the vertical line end at the horizontal line with the key that was pressed on the keybord.
+
+[![Matrix TEngwat screenshot](/tengwar_screenshot.png?raw=true "Tengwar font.")]
+
+
+
+
+The following information is taken from the original repository:
+
 [![Matrix screenshot](/screenshot.png?raw=true "Matrix's default appearance.")](https://rezmason.github.io/matrix)
 
 # [matrix](https://rezmason.github.io/matrix) (web-based green code rain, made with love)
