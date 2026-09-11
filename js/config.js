@@ -173,8 +173,6 @@ const versions = {
 		baseTexture: "broken",
 		forwardSpeed: 0.2,
 		palette: [
-			{ color: hsl(0.055, 0.40, 0.05), at: 0.0 },  // Deep Metallic Shadow (Dark Bronze/Charcoal)
-			{ color: hsl(0.066, 0.60, 0.15), at: 0.2 },  // Weathered Iron Core
 			{ color: hsl(0.077, 0.85, 0.40), at: 0.5 },  // Burning Copper / Ring Inscription Glow
 			{ color: hsl(0.1, 0.95, 0.55), at: 0.75 }, // Vivid Elven Gold Logo Face
 			{ color: hsl(0.119, 0.95, 0.75), at: 0.9 },  // Radiant Yellow Specular Highlight
