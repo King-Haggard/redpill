@@ -81,7 +81,7 @@ export default ({ regl, config, lkg }) => {
 	const rainPassRaindrop = loadText("shaders/glsl/rainPass.raindrop.frag.glsl");
 	const raindropUniforms = {
 		...commonUniforms,
-		...extractEntries(config, ["brightnessDecay", "fallSpeed", "raindropLength", "loops", "skipIntro"]),
+		...extractEntries(config, ["brightnessDecay", "fallSpeed", "raindropLength", "loops", "skipIntro", "stopLineY"]),
 	};
 	const raindrop = regl({
 		frag: regl.prop("frag"),
