@@ -72,12 +72,12 @@ vec4 computeResult(float simTime, bool isFirstFrame, vec2 glyphPos, vec4 previou
 
 	bool cursor = brightness > brightnessBelow || (activated && !activatedBelow);
 	
-	// NEW: Generate a random stop height for this column
+	// Generate a random stop height for this column
 	// This determines where raindrops will freeze
 	float randomStopHeight = randomFloat(vec2(glyphPos.x + 0.2, 0.));  // Random value 0.0 to 1.0
 	float stopHeightInPixels = randomStopHeight * numRows;  // Convert to screen pixels
 	
-	// NEW: Check if this glyph is at or has passed the random stop line
+	// Check if this glyph is at or has passed the random stop line
 	if (glyphPos.y >= stopHeightInPixels) {
 		// We're at or below the stop line
 		
@@ -86,7 +86,7 @@ vec4 computeResult(float simTime, bool isFirstFrame, vec2 glyphPos, vec4 previou
 			// Previous frame had a cursor here - keep it frozen
 			brightness = previous.r;
 			cursor = true;
-		} else if (cursor && glyphPos.y == stopHeightInPixels) {
+		} else if (cursor) {
 			// This is a NEW cursor just reaching the stop line - freeze it!
 			// Keep current brightness and mark as cursor
 			cursor = true;
