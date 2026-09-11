@@ -55,20 +55,15 @@ float getRainBrightness(float simTime, vec2 glyphPos) {
 	// Calculate the normalized Y position (0.0 at top, 1.0 at bottom)
 	float normalizedY = glyphPos.y / numRows;
 	
-	// Check if this glyph is at or below the stop line
-	// If it is, we use a fixed time value to keep it frozen
-	// If not, we let it animate normally
-	float effectiveTime;
-	if (normalizedY >= stopLineY) {
-		// Glyph is at or below the stop line - freeze it by using a constant time
-		// We use the time it would have when it reaches the stop line
-		effectiveTime = columnTimeOffset + (stopLineY * numRows * 0.01 * fallSpeed * columnSpeedOffset);
-	} else {
-		// Glyph is above the stop line - animate normally
-		effectiveTime = columnTimeOffset + simTime * fallSpeed * columnSpeedOffset;
+	// If this glyph is below the stop line, make it completely invisible (zero brightness)
+	if (normalizedY > stopLineY) {
+		return 0.0;  // Completely dark - invisible
 	}
 	
-	float rainTime = (glyphPos.y * 0.01 + effectiveTime) / raindropLength;
+	// For glyphs above or at the stop line, animate normally
+	float columnTime = columnTimeOffset + simTime * fallSpeed * columnSpeedOffset;
+	
+	float rainTime = (glyphPos.y * 0.01 + columnTime) / raindropLength;
 	if (!loops) {
 		rainTime = wobble(rainTime);
 	}
