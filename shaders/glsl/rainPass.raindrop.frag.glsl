@@ -56,7 +56,7 @@ float getRainBrightness(float simTime, vec2 glyphPos) {
 	float normalizedY = glyphPos.y / numRows;
 	
 	// If this glyph is below the stop line, make it completely invisible (zero brightness)
-	if (normalizedY > stopLineY) {
+	if (normalizedY < stopLineY) {
 		return 0.0;  // Completely dark - invisible
 	}
 	
