@@ -173,12 +173,12 @@ const versions = {
 		baseTexture: "broken",
 		forwardSpeed: 0.2,
 		palette: [
-			{ color: "hsl(20, 0.40, 0.05)", at: 0.0 },  // Deep Metallic Shadow (Dark Bronze/Charcoal)
-			{ color: "hsl(24, 0.60, 0.15)", at: 0.2 },  // Weathered Iron Core
-			{ color: "hsl(28, 0.85, 0.40)", at: 0.5 },  // Burning Copper / Ring Inscription Glow
-			{ color: "hsl(36, 0.95, 0.55)", at: 0.75 }, // Vivid Elven Gold Logo Face
-			{ color: "hsl(43, 0.95, 0.75)", at: 0.9 },  // Radiant Yellow Specular Highlight
-			{ color: "hsl(48, 1.00, 0.92)", at: 1.0 },  // White-Hot Incandescent Edge
+			{ color: hsl(20, 0.40, 0.05), at: 0.0 },  // Deep Metallic Shadow (Dark Bronze/Charcoal)
+			{ color: hsl(24, 0.60, 0.15), at: 0.2 },  // Weathered Iron Core
+			{ color: hsl(28, 0.85, 0.40), at: 0.5 },  // Burning Copper / Ring Inscription Glow
+			{ color: hsl(36, 0.95, 0.55), at: 0.75 }, // Vivid Elven Gold Logo Face
+			{ color: hsl(43, 0.95, 0.75), at: 0.9 },  // Radiant Yellow Specular Highlight
+			{ color: hsl(48, 1.00, 0.92), at: 1.0 },  // White-Hot Incandescent Edge
 		],
 	},	
 	classic: {},
