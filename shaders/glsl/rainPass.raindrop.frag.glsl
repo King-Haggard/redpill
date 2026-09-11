@@ -24,7 +24,6 @@ uniform float animationSpeed, fallSpeed;
 uniform bool loops, skipIntro;
 uniform float brightnessDecay;
 uniform float raindropLength;
-uniform float stopLineY;  // The stop line position (0.0 = top, 1.0 = bottom)
 
 // Helper functions for generating randomness, borrowed from elsewhere
 
@@ -51,22 +50,8 @@ float getRainBrightness(float simTime, vec2 glyphPos) {
 	if (loops) {
 		columnSpeedOffset = 0.5;
 	}
-	
-	// Calculate the normalized Y position (0.0 at top, 1.0 at bottom)
-	float normalizedY = glyphPos.y / numRows;
-	
-	// Determine which time to use for animation
-	float effectiveTime;
-	if (normalizedY >= stopLineY) {
-		// Glyph is at or below the stop line - freeze it at the stop line position
-		// Use a constant time so it stays frozen
-		effectiveTime = columnTimeOffset + (stopLineY * numRows * 0.01 * fallSpeed * columnSpeedOffset);
-	} else {
-		// Glyph is above the stop line - animate normally so rain falls
-		effectiveTime = columnTimeOffset + simTime * fallSpeed * columnSpeedOffset;
-	}
-	
-	float rainTime = (glyphPos.y * 0.01 + effectiveTime) / raindropLength;
+	float columnTime = columnTimeOffset + simTime * fallSpeed * columnSpeedOffset;
+	float rainTime = (glyphPos.y * 0.01 + columnTime) / raindropLength;
 	if (!loops) {
 		rainTime = wobble(rainTime);
 	}
