@@ -59,7 +59,7 @@ float getRainBrightness(float simTime, vec2 glyphPos) {
 	// If it is, we use a fixed time value to keep it frozen
 	// If not, we let it animate normally
 	float effectiveTime;
-	if (normalizedY <= stopLineY) {
+	if (normalizedY >= stopLineY) {
 		// Glyph is at or below the stop line - freeze it by using a constant time
 		// We use the time it would have when it reaches the stop line
 		effectiveTime = columnTimeOffset + (stopLineY * numRows * 0.01 * fallSpeed * columnSpeedOffset);
