@@ -173,7 +173,7 @@ const versions = {
 		isPolar: false, // Whether the glyphs arc across the screen or sit in a standard grid
 		hasThunder: false, // An effect that adds dramatic lightning flashes
 		baseTexture: "broken",
-		forwardSpeed: 0.2,
+		// forwardSpeed: 0.2,
 		palette: [
 			{ color: hsl(0.077, 0.85, 0.40), at: 0.5 },  // Burning Copper / Ring Inscription Glow
 			{ color: hsl(0.1, 0.95, 0.55), at: 0.75 }, // Vivid Elven Gold Logo Face
