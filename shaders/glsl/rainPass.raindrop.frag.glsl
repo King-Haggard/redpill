@@ -82,20 +82,20 @@ vec4 computeResult(float simTime, bool isFirstFrame, vec2 glyphPos, vec4 previou
 		// We're at or below the stop line
 		
 		// If there was a cursor frozen here in the previous frame, keep it
-		if (previous.g > 0.5) {
-			// Previous frame had a cursor here - keep it frozen
-			brightness = previous.r;
-			cursor = true;
-		} else if (cursor) {
+//		if (previous.g > 0.5) {
+//			// Previous frame had a cursor here - keep it frozen
+//			brightness = previous.r;
+//			cursor = true;
+//		} else if (cursor) {
 			// This is a NEW cursor just reaching the stop line - freeze it!
 			// Keep current brightness and mark as cursor
-			cursor = true;
-		} else {
+//			cursor = true;
+//		} else {
 			// No cursor here, and we're below the stop line - make invisible
-			brightness = 0.0;
-			cursor = false;
-		}
-	}
+//			brightness = 0.0;
+//			cursor = false;
+//		}
+//	}
 
 	// Blend the glyph's brightness with its previous brightness, so it winks on and off organically
 	if (!isFirstFrame) {
