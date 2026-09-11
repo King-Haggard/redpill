@@ -24,7 +24,7 @@ uniform float animationSpeed, fallSpeed;
 uniform bool loops, skipIntro;
 uniform float brightnessDecay;
 uniform float raindropLength;
-uniform float stopLineY;  // MODIFIED The stop line position (0.0 = top, 1.0 = bottom)
+uniform float stopLineY;  // The stop line position (0.0 = top, 1.0 = bottom)
 
 // Helper functions for generating randomness, borrowed from elsewhere
 
@@ -51,19 +51,24 @@ float getRainBrightness(float simTime, vec2 glyphPos) {
 	if (loops) {
 		columnSpeedOffset = 0.5;
 	}
-	float columnTime = columnTimeOffset + simTime * fallSpeed * columnSpeedOffset;
-
-	// MODIFIED: Check if the glyph position has reached the stop line
-	// If it has, we freeze the column time so the raindrop stops moving
-	float glyphNormalizedY = glyphPos.y / numRows;
-	if (glyphNormalizedY >= stopLineY) {
-		// Calculate what the column time would be when the raindrop reaches the stop line
-		// This keeps the raindrop animation frozen at the stop line
-		float distanceToStop = (stopLineY * numRows - glyphPos.y);
-		columnTime = columnTimeOffset + (stopLineY * numRows * 0.01) / raindropLength;
+	
+	// Calculate the normalized Y position (0.0 at top, 1.0 at bottom)
+	float normalizedY = glyphPos.y / numRows;
+	
+	// Check if this glyph is at or below the stop line
+	// If it is, we use a fixed time value to keep it frozen
+	// If not, we let it animate normally
+	float effectiveTime;
+	if (normalizedY >= stopLineY) {
+		// Glyph is at or below the stop line - freeze it by using a constant time
+		// We use the time it would have when it reaches the stop line
+		effectiveTime = columnTimeOffset + (stopLineY * numRows * 0.01 * fallSpeed * columnSpeedOffset);
+	} else {
+		// Glyph is above the stop line - animate normally
+		effectiveTime = columnTimeOffset + simTime * fallSpeed * columnSpeedOffset;
 	}
-
-	float rainTime = (glyphPos.y * 0.01 + adjustedColumnTime) / raindropLength;
+	
+	float rainTime = (glyphPos.y * 0.01 + effectiveTime) / raindropLength;
 	if (!loops) {
 		rainTime = wobble(rainTime);
 	}
