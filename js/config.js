@@ -105,6 +105,7 @@ const defaults = {
 	brightnessDecay: 1.0, // The rate at which glyphs light up and dim
 	ditherMagnitude: 0.05, // The magnitude of the random per-pixel dimming
 	fallSpeed: 0.3, // The speed the raindrops progress downwards
+	stopLineY: 0.5,  // This means 50% down from the top (middle of screen) 0.0 = top, 1.0 = bottom
 	glyphEdgeCrop: 0.0, // The border around a glyph in a font texture that should be cropped out
 	glyphHeightToWidth: 1, // The aspect ratio of glyphs
 	glyphVerticalSpacing: 1, // The ratio of the vertical distance between glyphs to their height
