@@ -167,8 +167,9 @@ const versions = {
 		bloomStrength: 2,
 		cursorIntensity: 5,
 		animationSpeed: 0.5,
-		volumetric: true,
+		volumetric: false,
 		rippleTypeName: "circle",
+		skipIntro: false,
 		isPolar: false, // Whether the glyphs arc across the screen or sit in a standard grid
 		hasThunder: false, // An effect that adds dramatic lightning flashes
 		baseTexture: "broken",
