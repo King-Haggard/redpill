@@ -2,19 +2,24 @@
 
 Yes, the digital rain is cool. But can it teach me something about coding? Can I teach myself something about coding? Or at least tweking the code that's already there? Let's try.
 
-My Goals:
+## My Goals:
 
 - Add a different font. Done.
 - Make the rain stop and aggregate at a certain horizontal line.
 - Start a new vertical line of rain if a key on the keyboad is pressed.
 - Let the vertical line end at the horizontal line with the key that was pressed on the keybord.
 
-[![Matrix Tengwar screenshot](/tengwar_screenshot.png?raw=true "Tengwar font.")]
+## Links
+
+- [Current custom version](https://king-haggard.github.io/redpill/?version=custom)
+- [Tengwar version](https://king-haggard.github.io/redpill/?version=tengwar)
+
+![Matrix Tengwar screenshot](/tengwar_screenshot.png?raw=true "Tengwar font.")
 
 
 
 
-The following information is taken from the original repository:
+**The following information is taken from the original repository:**
 
 [![Matrix screenshot](/screenshot.png?raw=true "Matrix's default appearance.")](https://rezmason.github.io/matrix)
 
