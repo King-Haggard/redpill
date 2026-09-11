@@ -51,6 +51,17 @@ float getRainBrightness(float simTime, vec2 glyphPos) {
 		columnSpeedOffset = 0.5;
 	}
 	float columnTime = columnTimeOffset + simTime * fallSpeed * columnSpeedOffset;
+	
+	// Generate a random maximum height for this column
+	// This determines how long the raindrops can be before they stop
+	float randomMaxHeight = randomFloat(vec2(glyphPos.x + 0.2, 0.));  // Random value 0.0 to 1.0
+	float maxHeightInPixels = randomMaxHeight * numRows;  // Convert to screen pixels
+	
+	// If this glyph is below the random max height, return zero brightness (invisible)
+	if (glyphPos.y > maxHeightInPixels) {
+		return 0.0;
+	}
+	
 	float rainTime = (glyphPos.y * 0.01 + columnTime) / raindropLength;
 	if (!loops) {
 		rainTime = wobble(rainTime);
