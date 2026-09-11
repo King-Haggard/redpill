@@ -51,17 +51,6 @@ float getRainBrightness(float simTime, vec2 glyphPos) {
 		columnSpeedOffset = 0.5;
 	}
 	float columnTime = columnTimeOffset + simTime * fallSpeed * columnSpeedOffset;
-	
-	// Generate a random maximum height for this column
-	// This determines how long the raindrops can be before they stop
-	float randomMaxHeight = randomFloat(vec2(glyphPos.x + 0.2, 0.));  // Random value 0.0 to 1.0
-	float maxHeightInPixels = randomMaxHeight * numRows;  // Convert to screen pixels
-	
-	// If this glyph is below the random max height, return zero brightness (invisible)
-	if (glyphPos.y > maxHeightInPixels) {
-		return 0.0;
-	}
-	
 	float rainTime = (glyphPos.y * 0.01 + columnTime) / raindropLength;
 	if (!loops) {
 		rainTime = wobble(rainTime);
@@ -82,6 +71,31 @@ vec4 computeResult(float simTime, bool isFirstFrame, vec2 glyphPos, vec4 previou
 	bool activatedBelow = skipIntro || introProgressBelow > 0.;
 
 	bool cursor = brightness > brightnessBelow || (activated && !activatedBelow);
+	
+	// NEW: Generate a random stop height for this column
+	// This determines where raindrops will freeze
+	float randomStopHeight = randomFloat(vec2(glyphPos.x + 0.2, 0.));  // Random value 0.0 to 1.0
+	float stopHeightInPixels = randomStopHeight * numRows;  // Convert to screen pixels
+	
+	// NEW: Check if this glyph is at or has passed the random stop line
+	if (glyphPos.y >= stopHeightInPixels) {
+		// We're at or below the stop line
+		
+		// If there was a cursor frozen here in the previous frame, keep it
+		if (previous.g > 0.5) {
+			// Previous frame had a cursor here - keep it frozen
+			brightness = previous.r;
+			cursor = true;
+		} else if (cursor && glyphPos.y == stopHeightInPixels) {
+			// This is a NEW cursor just reaching the stop line - freeze it!
+			// Keep current brightness and mark as cursor
+			cursor = true;
+		} else {
+			// No cursor here, and we're below the stop line - make invisible
+			brightness = 0.0;
+			cursor = false;
+		}
+	}
 
 	// Blend the glyph's brightness with its previous brightness, so it winks on and off organically
 	if (!isFirstFrame) {
