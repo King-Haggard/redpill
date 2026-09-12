@@ -74,30 +74,40 @@ vec4 computeResult(float simTime, bool isFirstFrame, vec2 glyphPos, vec4 previou
 	
 	// Generate a random stop height for this column
 	// This determines where raindrops will freeze
-	// float randomStopHeight = randomFloat(vec2(glyphPos.x + 0.2, 0.));  // Random value 0.0 to 1.0
-	// float stopHeightInPixels = randomStopHeight * numRows;  // Convert to screen pixels
+	
+	float randomStopHeight = randomFloat(vec2(glyphPos.x + 0.2, 0.));  // Random value 0.0 to 1.0
+	float stopHeightInPixels = randomStopHeight * numRows;  // Convert to screen pixels
 	
 	// Check if this glyph is at or has passed the random stop line
-	// if (glyphPos.y >= stopHeightInPixels) {
-		// We're at or below the stop line
+	
+	 if (glyphPos.y >= stopHeightInPixels) {
+	
+	// We're at or below the stop line
 		
-		// If there was a cursor frozen here in the previous frame, keep it
-//		if (previous.g > 0.5) {
-//			// Previous frame had a cursor here - keep it frozen
-//			brightness = previous.r;
-//			cursor = true;
-//		} else if (cursor) {
-			// This is a NEW cursor just reaching the stop line - freeze it!
-			// Keep current brightness and mark as cursor
-//			cursor = true;
-//		} else {
-			// No cursor here, and we're below the stop line - make invisible
-//			brightness = 0.0;
-//			cursor = false;
-//		}
-//	}
+	// If there was a cursor frozen here in the previous frame, keep it
+	// if (previous.g > 0.5) {
+	// Previous frame had a cursor here - keep it frozen
+
+	// brightness = previous.r;
+	// cursor = true;
+	// } else if (cursor) {
+
+	// This is a NEW cursor just reaching the stop line - freeze it!
+	// Keep current brightness and mark as cursor
+
+	// cursor = true;
+	// } else {
+
+	// No cursor here, and we're below the stop line - make invisible
+
+	 brightness = 0.0;
+	 cursor = false;
+
+			}
+	// }
 
 	// Blend the glyph's brightness with its previous brightness, so it winks on and off organically
+
 	if (!isFirstFrame) {
 		float previousBrightness = previous.r;
 		brightness = mix(previousBrightness, brightness, brightnessDecay);

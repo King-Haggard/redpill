@@ -105,7 +105,6 @@ const defaults = {
 	brightnessDecay: 1.0, // The rate at which glyphs light up and dim
 	ditherMagnitude: 0.05, // The magnitude of the random per-pixel dimming
 	fallSpeed: 0.3, // The speed the raindrops progress downwards
-	stopLineY: 0.5,  // This means 50% down from the top (middle of screen) 0.0 = top, 1.0 = bottom
 	glyphEdgeCrop: 0.0, // The border around a glyph in a font texture that should be cropped out
 	glyphHeightToWidth: 1, // The aspect ratio of glyphs
 	glyphVerticalSpacing: 1, // The ratio of the vertical distance between glyphs to their height
@@ -117,6 +116,7 @@ const defaults = {
 	rippleThickness: 0.2, // The thickness of the ripple effect
 	rippleScale: 30, // The size of the ripple effect
 	rippleSpeed: 0.2, // The rate at which the ripple effect progresses
+	stopLineY: 0.5,  // This means 50% down from the top (middle of screen) 0.0 = top, 1.0 = bottom	
 	numColumns: 80, // The maximum dimension of the glyph grid
 	density: 1, // In volumetric mode, the number of actual columns compared to the grid
 	palette: [
@@ -160,25 +160,29 @@ const versions = {
 			{ color: hsl(0.1, 1.0, 0.9), at: 1.0 },
 			{ color: hsl(1, 0, 2), at: 2.0 },
 		],
+	
 	},	
-	tengwar: {
+		tengwar: {
 		font: "tengwar",
-		numColumns: 80,
-		bloomStrength: 2,
-		cursorIntensity: 5,
+		numColumns: 40,
+		bloomStrength: 1.5,
+		cursorIntensity: 1,
 		animationSpeed: 0.5,
+		fallSpeed: 0.4, // The speed the raindrops progress downwards
 		volumetric: false,
-		rippleTypeName: "circle",
+		// rippleTypeName: "circle",
 		skipIntro: false,
+		stopLineY: 0.5,  // This means 50% down from the top (middle of screen) 0.0 = top, 1.0 = bottom	
 		isPolar: false, // Whether the glyphs arc across the screen or sit in a standard grid
 		hasThunder: false, // An effect that adds dramatic lightning flashes
 		baseTexture: "broken",
 		// forwardSpeed: 0.2,
 		palette: [
-			{ color: hsl(0.077, 0.85, 0.40), at: 0.5 },  // Burning Copper / Ring Inscription Glow
-			{ color: hsl(0.1, 0.95, 0.55), at: 0.75 }, // Vivid Elven Gold Logo Face
-			{ color: hsl(0.119, 0.95, 0.75), at: 0.9 },  // Radiant Yellow Specular Highlight
-			{ color: hsl(0.133, 1.00, 0.92), at: 1.0 },  // White-Hot Incandescent Edge
+			{ color: hsl(0.1, 0.1, 0.1), at: 0 },
+		//	{ color: hsl(0.077, 0.85, 0.40), at: 0.5 },  // Burning Copper / Ring Inscription Glow
+		//	{ color: hsl(0.1, 0.95, 0.55), at: 0.6 }, // Vivid Elven Gold Logo Face
+		//	{ color: hsl(0.119, 0.95, 0.75), at: 0.7 },  // Radiant Yellow Specular Highlight
+			{ color: hsl(0.133, 1.00, 0.92), at: 0.8 },  // White-Hot Incandescent Edge
 		],
 	},	
 	classic: {},
