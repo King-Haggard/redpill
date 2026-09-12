@@ -74,11 +74,11 @@ vec4 computeResult(float simTime, bool isFirstFrame, vec2 glyphPos, vec4 previou
 	
 	// Generate a random stop height for this column
 	// This determines where raindrops will freeze
-	float randomStopHeight = randomFloat(vec2(glyphPos.x + 0.2, 0.));  // Random value 0.0 to 1.0
-	float stopHeightInPixels = randomStopHeight * numRows;  // Convert to screen pixels
+	// float randomStopHeight = randomFloat(vec2(glyphPos.x + 0.2, 0.));  // Random value 0.0 to 1.0
+	// float stopHeightInPixels = randomStopHeight * numRows;  // Convert to screen pixels
 	
 	// Check if this glyph is at or has passed the random stop line
-	if (glyphPos.y >= stopHeightInPixels) {
+	// if (glyphPos.y >= stopHeightInPixels) {
 		// We're at or below the stop line
 		
 		// If there was a cursor frozen here in the previous frame, keep it
