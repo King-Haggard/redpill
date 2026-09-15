@@ -74,48 +74,89 @@ vec4 computeResult(float simTime, bool isFirstFrame, vec2 glyphPos, vec4 previou
 	
 	// Generate a random stop height for this column
 	// This determines where raindrops will freeze
-	
-	float randomStopHeight = randomFloat(vec2(glyphPos.x + 0.2, 0.));  // Random value 0.0 to 1.0
+	/* float randomStopHeight = randomFloat(vec2(glyphPos.x + 0.6, 0.));  // Random value 0.0 to 1.0
 	float stopHeightInPixels = randomStopHeight * numRows;  // Convert to screen pixels
+	*/
 	
+	float stopHeightInPixels = numRows * 0.75; // Gib die Höhe des Stops an.
+
+/*
+	if (glyphPos.y >= stopHeightInPixels) {
+	    if (previous.g > 0.9) {
+  	      brightness = previous.r;
+ 	      cursor = true;
+    }
+}
+*/
+
+
+float freezeLine = numRows * 0.5;
+
+// Above center: normal rain
+if (glyphPos.y > freezeLine) {
+    brightness = getRainBrightness(simTime, glyphPos);
+} else {
+    // Below center: no new rain generated
+    brightness = getRainBrightness(simTime, glyphPos) - 0.4; // Dim the brightness below the freeze line
+    cursor = false;
+}
+if (
+    glyphPos.y <= freezeLine - 1.0 &&
+    glyphPos.y >= freezeLine + 1.0 &&
+    brightness > brightnessBelow
+) {
+    cursor = true;
+}
+
+/*
 	// Check if this glyph is at or has passed the random stop line
-	
-	 if (glyphPos.y >= stopHeightInPixels) {
-	
-	// We're at or below the stop line
+	if (glyphPos.y >= stopHeightInPixels) {
+		// We're at or below the stop line
 		
-	// If there was a cursor frozen here in the previous frame, keep it
-	// if (previous.g > 0.5) {
-	// Previous frame had a cursor here - keep it frozen
+		// If there was a cursor frozen here in the previous frame, keep it
+		if (previous.g > 0.9) {
+			// Previous frame had a cursor here - keep it frozen
+			brightness = previous.r;
+			cursor = true;
+		} else if (cursor) {
+			// This is a NEW cursor just reaching the stop line - freeze it!
+			// Keep current brightness and mark as cursor
+			cursor = true;
+		} else {
+			// No cursor here, and we're below the stop line - make invisible
+			brightness = 0.0;
+			cursor = false;
+		}
+	}
 
-	// brightness = previous.r;
-	// cursor = true;
-	// } else if (cursor) {
-
-	// This is a NEW cursor just reaching the stop line - freeze it!
-	// Keep current brightness and mark as cursor
-
-	// cursor = true;
-	// } else {
-
-	// No cursor here, and we're below the stop line - make invisible
-
-	 brightness = 0.0;
-	 cursor = false;
-
-			}
-	// }
+*/
 
 	// Blend the glyph's brightness with its previous brightness, so it winks on and off organically
-
 	if (!isFirstFrame) {
 		float previousBrightness = previous.r;
 		brightness = mix(previousBrightness, brightness, brightnessDecay);
 	}
 
+// Fügt in der Mitte eine Linie ein, die langsam eingeblendet wird
+
+float lineDelay = 2.0;     // Sekunden warten
+float fadeDuration = 2.0;  // Sekunden für das Einblenden
+
+float fadeFactor =
+  smoothstep(lineDelay,
+               lineDelay + fadeDuration,
+               simTime);
+
+if (abs(glyphPos.y - numRows * 0.5) < 0.7) {
+    brightness = 1.0 * fadeFactor;
+}
+
+
+
 	vec4 result = vec4(brightness, cursor, activated, introProgress);
 	return result;
 }
+
 
 void main()	{
 	float simTime = time * animationSpeed;

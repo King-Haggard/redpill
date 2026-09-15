@@ -1,8 +1,8 @@
 # Taking the red pill
 
-Yes, the digital rain is cool. But can it teach me something about coding? Can I teach myself something about coding? Or at least tweking the code that's already there? Let's try.
+Yes, the digital rain is cool. But can it teach me something about coding? Can I teach myself something about coding? Or at least tweaking the code that's already there? Let's try.
 
-## My Goals:
+## My Goals
 
 - Add a different font. Done.
 - Make the rain stop and aggregate at a certain horizontal line.
@@ -137,36 +137,36 @@ Now you know link fu. Here's a list of customization options:
   - "paradise" is how the Matrix's idyllic predecessor may have appeared: warm, simplistic, encompassing.
   - "resurrections" is the updated Matrix code
   - "palimpsest" is a custom version inspired by the art and sound of [Rob Dougan](https://en.wikipedia.org/wiki/Rob_Dougan)'s [Furious Angels](https://en.wikipedia.org/wiki/Furious_Angels).
-- `skipIntro` - whether or not to start from a blank screen. Can be "true" or "false", default is *true*.
-- `font` - the set of glyphs to draw. Current options are "matrixcode", "resurrections", "gothic", "coptic", "huberfishA", and "huberfishD".
-- `numColumns` - the number of columns (and rows) to draw. Default is 80.
-- `glyphFlip` - when set to "true", this flips the glyphs. Default is "false".
-- `glyphRotation` - the angle to rotate the glyphs in-place, in degrees. Default is 0. I suggest angles that are multiples of 90°.
-- `volumetric` - when set to "true", this renders the glyphs with depth, slowly approaching the eye. Default is "false".
-- `density` - the number of 3D raindrops to draw, proportional to the default. Default is 1.0.
-- `forwardSpeed` - the rate that the 3D raindrops approach. Default is 1.0.
-- `slant` - the angle that the 2D raindrops fall, in degrees. Default is 0.
+  - ("none" displays the 'debug view', a behind-the-scenes look at the anatomy of the effect.)
+- `animationSpeed` - the overall speed of the animation. Can be any number.
+- `backgroundColor`, `cursorColor`, `glintColor` — other *R,G,B* values that apply to the corresponding parts of the effect.
 - `bloomSize` - the glow quality, from 0 to 1. Default is 0.4. Lowering this value may help the digital rain run smoother on your device.
 - `bloomStrength` - the glow intensity, from 0 to 1. Default is 0.7.
-- `ditherMagnitude` - the amount to randomly darken pixels, to conceal [banding](https://en.wikipedia.org/wiki/Colour_banding). Default is 0.05.
-- `resolution` - the image size, relative to the window size. Default is 1. Lowering this value may improve your performance, especially on high pixel density displays.
-- `raindropLength` - the vertical scale of "raindrops" in the columns. Can be any number.
-- `animationSpeed` - the overall speed of the animation. Can be any number.
-- `fallSpeed` - the speed of the rain's descent. Can be any number.
-- `cycleSpeed` - the speed that the glyphs change their symbol. Can be any number.
-- `effect` - alternatives to the default post-processing effect. Can be "plain", "pride", "stripes", "none", "image" or "mirror".
-  - ("none" displays the 'debug view', a behind-the-scenes look at the anatomy of the effect.)
 - `camera` - some effects, ie. the mirror effect, optionally support webcam input. Can be "true" or "false". Default is false.
-- `stripeColors` - if you set the effect to "stripes", you can specify the colors of vertical stripes as alternating *R,G,B* numeric values, like so: [https://rezmason.github.io/matrix/?effect=stripes&stripeColors=1,0,0,1,1,0,0,1,0](https://rezmason.github.io/matrix/?effect=stripes&stripeColors=1,0,0,1,1,0,0,1,0)
-- `palette` — with the normal "palette" effect, you can specify the colors and placement of the colors along the color grade as alternating *R,G,B,%* numeric values, like so: [https://rezmason.github.io/matrix/?palette=0.1,0,0.2,0,0.2,0.5,0,0.5,1,0.7,0,1](https://rezmason.github.io/matrix/?palette=0.1,0,0.2,0,0.2,0.5,0,0.5,1,0.7,0,1)
-- `backgroundColor`, `cursorColor`, `glintColor` — other *R,G,B* values that apply to the corresponding parts of the effect.
-- `paletteHSL`, `stripeHSL`, `backgroundHSL`, `cursorHSL`, and `glintHSL` — the same as the above, except they use *H,S,L* (hue, saturation, lightness) instead of *R,G,B*.
 - `cursorIntensity`, — the brightness of cursors' glow. Can be any number greater than zero. Default is 2.0.
-- `glintIntensity` — the brightness of glint glow, if there is any glint. Can be any number greater than zero. Default is 1.0.
-- `url` - if you set the effect to "image", this is how you specify which image to load. It doesn't work with any URL; I suggest grabbing them from Wikipedia: [https://rezmason.github.io/matrix/?effect=image&url=https://upload.wikimedia.org/wikipedia/commons/f/f5/EagleRock.jpg](https://rezmason.github.io/matrix/?effect=image&url=https://upload.wikimedia.org/wikipedia/commons/f/f5/EagleRock.jpg)
-- `loops` - (WIP) if set to "true", this causes the effect to loop, so that it can be converted into a looping video.
+- `cycleSpeed` - the speed that the glyphs change their symbol. Can be any number.
+- `density` - the number of 3D raindrops to draw, proportional to the default. Default is 1.0.
+- `ditherMagnitude` - the amount to randomly darken pixels, to conceal [banding](https://en.wikipedia.org/wiki/Colour_banding). Default is 0.05.
+- `effect` - alternatives to the default post-processing effect. Can be "plain", "pride", "stripes", "none", "image" or "mirror".
+- `fallSpeed` - the speed of the rain's descent. Can be any number.
+- `font` - the set of glyphs to draw. Current options are "matrixcode", "resurrections", "gothic", "coptic", "huberfishA", and "huberfishD".
+- `forwardSpeed` - the rate that the 3D raindrops approach. Default is 1.0.
 - `fps` — the framerate of the effect. Can be any number between 0 and 60. Default is 60.
+- `glintIntensity` — the brightness of glint glow, if there is any glint. Can be any number greater than zero. Default is 1.0.
+- `glyphFlip` - when set to "true", this flips the glyphs. Default is "false".
+- `glyphRotation` - the angle to rotate the glyphs in-place, in degrees. Default is 0. I suggest angles that are multiples of 90°.
+- `loops` - (WIP) if set to "true", this causes the effect to loop, so that it can be converted into a looping video.
+- `numColumns` - the number of columns (and rows) to draw. Default is 80.
+- `paletteHSL`, `stripeHSL`, `backgroundHSL`, `cursorHSL`, and `glintHSL` — the same as the above, except they use *H,S,L* (hue, saturation, lightness) instead of *R,G,B*.
+- `palette` — with the normal "palette" effect, you can specify the colors and placement of the colors along the color grade as alternating *R,G,B,%* numeric values, like so: [https://rezmason.github.io/matrix/?palette=0.1,0,0.2,0,0.2,0.5,0,0.5,1,0.7,0,1](https://rezmason.github.io/matrix/?palette=0.1,0,0.2,0,0.2,0.5,0,0.5,1,0.7,0,1)
+- `raindropLength` - the vertical scale of "raindrops" in the columns. Can be any number.
+- `resolution` - the image size, relative to the window size. Default is 1. Lowering this value may improve your performance, especially on high pixel density displays.
+- `skipIntro` - whether or not to start from a blank screen. Can be "true" or "false", default is *true*.
+- `slant` - the angle that the 2D raindrops fall, in degrees. Default is 0.
+- `stripeColors` - if you set the effect to "stripes", you can specify the colors of vertical stripes as alternating *R,G,B* numeric values, like so: [https://rezmason.github.io/matrix/?effect=stripes&stripeColors=1,0,0,1,1,0,0,1,0](https://rezmason.github.io/matrix/?effect=stripes&stripeColors=1,0,0,1,1,0,0,1,0)
 - `suppressWarnings` - if set to "true", this suppresses any warnings that would otherwise appear— when viewing the project on a device with no GPU, for example.
+- `url` - if you set the effect to "image", this is how you specify which image to load. It doesn't work with any URL; I suggest grabbing them from Wikipedia: [https://rezmason.github.io/matrix/?effect=image&url=https://upload.wikimedia.org/wikipedia/commons/f/f5/EagleRock.jpg](https://rezmason.github.io/matrix/?effect=image&url=https://upload.wikimedia.org/wikipedia/commons/f/f5/EagleRock.jpg)
+- `volumetric` - when set to "true", this renders the glyphs with depth, slowly approaching the eye. Default is "false".
 
 ## Troubleshooting
 
