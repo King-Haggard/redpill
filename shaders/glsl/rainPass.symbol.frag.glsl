@@ -62,3 +62,4 @@ void main()	{
 	vec4 raindrop = texture2D( raindropState, screenPos );
 	gl_FragColor = computeResult(simTime, isFirstFrame, glyphPos, screenPos, previous, raindrop);
 }
+

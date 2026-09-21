@@ -113,7 +113,7 @@ const defaults = {
 	isolateGlint: false, // Whether the "glint"— highlights on certain symbols in the font— should appear
 	isometric: false,
 	loops: false,
-	numColumns: 80, // The maximum dimension of the glyph grid
+	numColumns: 81, // The maximum dimension of the glyph grid
 	palette: [
 		// The color palette that glyph brightness is color mapped to
 		{ color: hsl(0.3, 0.9, 0.0), at: 0.0 },
@@ -128,7 +128,7 @@ const defaults = {
 	rippleSpeed: 0.2, // The rate at which the ripple effect progresses
 	rippleThickness: 0.2, // The thickness of the ripple effect
 	rippleTypeName: null, // The variety of the ripple effect
-	skipIntro: true,
+	skipIntro: false,
 	slant: 0, // The angle at which rain falls; the orientation of the glyph grid
 	stopLineY: 0.5,  // This means 50% down from the top (middle of screen) 0.0 = top, 1.0 = bottom	
 	suppressWarnings: false, // Whether to show warnings to visitors on load

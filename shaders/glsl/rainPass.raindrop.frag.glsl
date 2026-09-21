@@ -89,7 +89,6 @@ vec4 computeResult(float simTime, bool isFirstFrame, vec2 glyphPos, vec4 previou
 }
 */
 
-
 float freezeLine = numRows * 0.5;
 
 // Above center: normal rain
@@ -97,7 +96,7 @@ if (glyphPos.y > freezeLine) {
     brightness = getRainBrightness(simTime, glyphPos);
 } else {
     // Below center: no new rain generated
-    brightness = getRainBrightness(simTime, glyphPos) - 0.4; // Dim the brightness below the freeze line
+    brightness = getRainBrightness(simTime, glyphPos) - 0.45; // Dim the brightness below the freeze line. 0.5 and more is completely dark
     cursor = false;
 }
 if (
@@ -108,51 +107,27 @@ if (
     cursor = true;
 }
 
-/*
-	// Check if this glyph is at or has passed the random stop line
-	if (glyphPos.y >= stopHeightInPixels) {
-		// We're at or below the stop line
-		
-		// If there was a cursor frozen here in the previous frame, keep it
-		if (previous.g > 0.9) {
-			// Previous frame had a cursor here - keep it frozen
-			brightness = previous.r;
-			cursor = true;
-		} else if (cursor) {
-			// This is a NEW cursor just reaching the stop line - freeze it!
-			// Keep current brightness and mark as cursor
-			cursor = true;
-		} else {
-			// No cursor here, and we're below the stop line - make invisible
-			brightness = 0.0;
-			cursor = false;
-		}
-	}
-
-*/
-
 	// Blend the glyph's brightness with its previous brightness, so it winks on and off organically
 	if (!isFirstFrame) {
 		float previousBrightness = previous.r;
 		brightness = mix(previousBrightness, brightness, brightnessDecay);
 	}
 
-// Fügt in der Mitte eine Linie ein, die langsam eingeblendet wird
+// Fügt an der Position der ersten Zahl nach numRows eine Linie mit der Dicke der zweiten Zahl ein, die langsam eingeblendet wird. Für eine einzelne Linie sollte numColumns eine ungerade Zahl sein.
 
-float lineDelay = 2.0;     // Sekunden warten
-float fadeDuration = 2.0;  // Sekunden für das Einblenden
+float lineDelay = 3.0;     // Sekunden warten
+float fadeDuration = 3.0;  // Sekunden Dauer des Einblendens
 
 float fadeFactor =
   smoothstep(lineDelay,
                lineDelay + fadeDuration,
                simTime);
 
-if (abs(glyphPos.y - numRows * 0.5) < 0.7) {
+if (abs(glyphPos.y - numRows * 0.5) <= 0.5) {
     brightness = 1.0 * fadeFactor;
 }
 
-
-
+	//Addiert die Helligkeit zur Linie in der Mitte
 	vec4 result = vec4(brightness, cursor, activated, introProgress);
 	return result;
 }
