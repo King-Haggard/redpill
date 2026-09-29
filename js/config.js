@@ -96,6 +96,8 @@ const defaults = {
 	font: "matrixcode",
 	forwardSpeed: 0.25, // The speed volumetric rain approaches the eye
 	fps: 60, // The target frame rate (frames per second) of the effect
+	freezeMode: 1,        // 0=Aus, 1=Mittellinie
+	freezeStartTime: 6.0, // Wartezeit bis zum Freeze-Beginn (Sekunden, verrechnet mit Animationsgeschwindigkeit)
 	glintBrightness: -1.5, // The brightness of the glints, before any effects are applied
 	glintColor: hsl(0, 0, 1), // The color of the glint
 	glintContrast: 2.5, // The contrast of the glints, before any effects are applied

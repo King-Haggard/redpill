@@ -16,6 +16,9 @@ uniform float animationSpeed, cycleSpeed;
 uniform bool loops, showDebugView;
 uniform float glyphSequenceLength;
 
+uniform float freezeMode;
+
+
 // Helper functions for generating randomness, borrowed from elsewhere
 
 highp float randomFloat( const in vec2 uv ) {

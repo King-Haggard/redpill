@@ -25,6 +25,8 @@ uniform bool loops, skipIntro;
 uniform float brightnessDecay;
 uniform float raindropLength;
 
+uniform float freezeMode;
+
 // Helper functions for generating randomness, borrowed from elsewhere
 
 highp float randomFloat( const in vec2 uv ) {
@@ -72,48 +74,30 @@ vec4 computeResult(float simTime, bool isFirstFrame, vec2 glyphPos, vec4 previou
 
 	bool cursor = brightness > brightnessBelow || (activated && !activatedBelow);
 	
-	// Generate a random stop height for this column
-	// This determines where raindrops will freeze
-	/* float randomStopHeight = randomFloat(vec2(glyphPos.x + 0.6, 0.));  // Random value 0.0 to 1.0
-	float stopHeightInPixels = randomStopHeight * numRows;  // Convert to screen pixels
-	*/
 	
 	float stopHeightInPixels = numRows * 0.75; // Gib die Höhe des Stops an.
 
-/*
-	if (glyphPos.y >= stopHeightInPixels) {
-	    if (previous.g > 0.9) {
-  	      brightness = previous.r;
- 	      cursor = true;
-    }
-}
-*/
 
-float freezeLine = numRows * 0.5;
+	float freezeLine = numRows * 0.5;
 
-// Above center: normal rain
-if (glyphPos.y > freezeLine) {
-    brightness = getRainBrightness(simTime, glyphPos);
-} else {
-    // Below center: no new rain generated
-    brightness = getRainBrightness(simTime, glyphPos) - 0.45; // Dim the brightness below the freeze line. 0.5 and more is completely dark
-    cursor = false;
-}
-if (
-    glyphPos.y <= freezeLine - 1.0 &&
-    glyphPos.y >= freezeLine + 1.0 &&
-    brightness > brightnessBelow
-) {
-    cursor = true;
-}
+	if (freezeMode == 1.0) {
 
-	// Blend the glyph's brightness with its previous brightness, so it winks on and off organically
-	if (!isFirstFrame) {
-		float previousBrightness = previous.r;
-		brightness = mix(previousBrightness, brightness, brightnessDecay);
+	// Above center: normal rain
+	if (glyphPos.y > freezeLine) {
+		brightness = getRainBrightness(simTime, glyphPos);
+	} else {
+		// Below center: no new rain generated
+		brightness = getRainBrightness(simTime, glyphPos) - 0.45; // Dim the brightness below the freeze line. 0.5 and more is completely dark
+		cursor = false;
+	}
+	if (
+		glyphPos.y <= freezeLine - 1.0 ||
+		glyphPos.y >= freezeLine + 1.0
+	) {
+		cursor = true;
 	}
 
-// Fügt an der Position der ersten Zahl nach numRows eine Linie mit der Dicke der zweiten Zahl ein, die langsam eingeblendet wird. Für eine einzelne Linie sollte numColumns eine ungerade Zahl sein.
+	// Fügt an der Position der ersten Zahl nach numRows eine Linie mit der Dicke der zweiten Zahl ein, die langsam eingeblendet wird. Für eine einzelne Linie sollte numColumns eine ungerade Zahl sein.
 
 float lineDelay = 3.0;     // Sekunden warten
 float fadeDuration = 3.0;  // Sekunden Dauer des Einblendens
@@ -127,11 +111,20 @@ if (abs(glyphPos.y - numRows * 0.5) <= 0.5) {
     brightness = 1.0 * fadeFactor;
 }
 
+
+}
+
+	// Blend the glyph's brightness with its previous brightness, so it winks on and off organically
+	else if (!isFirstFrame) {
+		float previousBrightness = previous.r;
+		brightness = mix(previousBrightness, brightness, brightnessDecay);
+	}
+	
 	//Addiert die Helligkeit zur Linie in der Mitte
 	vec4 result = vec4(brightness, cursor, activated, introProgress);
 	return result;
-}
 
+}
 
 void main()	{
 	float simTime = time * animationSpeed;
