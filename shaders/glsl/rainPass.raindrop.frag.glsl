@@ -74,12 +74,12 @@ vec4 computeResult(float simTime, bool isFirstFrame, vec2 glyphPos, vec4 previou
 
 	bool cursor = brightness > brightnessBelow || (activated && !activatedBelow);
 	
-	
-	float stopHeightInPixels = numRows * 0.75; // Gib die Höhe des Stops an.
-
+	float lineDelay = 3.0;     // Sekunden warten
+	float fadeDuration = 3.0;  // Sekunden Dauer des Einblendens
 
 	float freezeLine = numRows * 0.5;
 
+	// Freeze mode: above the freeze line, normal rain. Below the freeze line, no new rain is generated, and the existing rain is dimmed.
 	if (freezeMode == 1.0) {
 
 	// Above center: normal rain
@@ -91,28 +91,121 @@ vec4 computeResult(float simTime, bool isFirstFrame, vec2 glyphPos, vec4 previou
 		cursor = false;
 	}
 	if (
-		glyphPos.y <= freezeLine - 1.0 ||
-		glyphPos.y >= freezeLine + 1.0
+		glyphPos.y <= freezeLine - 0.0 ||
+		glyphPos.y >= freezeLine + 0.0
 	) {
 		cursor = true;
 	}
 
 	// Fügt an der Position der ersten Zahl nach numRows eine Linie mit der Dicke der zweiten Zahl ein, die langsam eingeblendet wird. Für eine einzelne Linie sollte numColumns eine ungerade Zahl sein.
+	float fadeFactor =
+	smoothstep(lineDelay,
+				lineDelay + fadeDuration,
+				simTime);
 
-float lineDelay = 3.0;     // Sekunden warten
-float fadeDuration = 3.0;  // Sekunden Dauer des Einblendens
+	if (abs(glyphPos.y - numRows * 0.5) <= 0.5) {
+		brightness = 1.0 * fadeFactor;
+	}
 
-float fadeFactor =
-  smoothstep(lineDelay,
-               lineDelay + fadeDuration,
-               simTime);
+	if (abs(glyphPos.y - numRows * 0.49) <= 0.5) {
+		brightness = 0.65 * fadeFactor;
+	}
 
-if (abs(glyphPos.y - numRows * 0.5) <= 0.5) {
-    brightness = 1.0 * fadeFactor;
+	if (abs(glyphPos.y - numRows * 0.48) <= 0.5) {
+		brightness = 0.5 * fadeFactor;
+	}
+
 }
 
+// Zeichnet einen Kreis in der Mitte des Bildschirms
+if (freezeMode == 2.0) {
+
+    float radius = numRows * 0.2;
+    float thickness = 2.0;
+
+   vec2 center =
+        vec2(
+            numColumns * 0.5,
+            numRows * 0.5
+        );
+
+
+	float angle =
+		atan(
+			glyphPos.y - center.y,
+			glyphPos.x - center.x
+		);
+	float topAngle = angle + PI * 0.5;
+	topAngle = mod(topAngle + 2.0 * PI, 2.0 * PI);
+	float buildDelay = 10.0;
+	float buildDuration = 15.0;
+
+	float buildProgress =
+		clamp(
+			(simTime - buildDelay)
+			/ buildDuration,
+			0.0,
+			1.0
+    );
+	float angleDistance =
+    min(
+        topAngle,
+        2.0 * PI - topAngle
+    );
+	float visibleAngle =
+    buildProgress * PI;
+	bool buildVisible =
+    angleDistance <= visibleAngle;
+
+ 
+    float distanceToCenter =
+        distance(
+            glyphPos,
+            center
+        );
+
+/*
+// 1.1 - und so weiter gibt ein interessantes Ergbnis
+float ringFactor =
+    1.0 -
+    clamp(
+        abs(distanceToCenter - radius)
+        / thickness,
+        0.2,
+        1.0
+    );*/
+
+float ringFactor =
+    1.0 -
+    smoothstep(
+        0.0,
+        thickness,
+        abs(distanceToCenter - radius)
+    );
+
+if (
+    ringFactor > 0.0 &&
+    buildVisible
+) {
+
+    float minRingBrightness = 0.1;
+
+    if (cursor) {
+        brightness = 1.0;
+    }
+
+    brightness =
+        max(
+            minRingBrightness,
+            (previous.r + 0.1) * 0.9
+        );
+
+    brightness *=
+        0.7 + 0.5 * ringFactor;
+}
 
 }
+
 
 	// Blend the glyph's brightness with its previous brightness, so it winks on and off organically
 	else if (!isFirstFrame) {
